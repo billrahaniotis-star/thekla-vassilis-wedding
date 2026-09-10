@@ -6,6 +6,10 @@
 
   <title>Thekla & Vassilis Wedding</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
   <style>
     * {
       box-sizing: border-box;
@@ -14,131 +18,312 @@
     body {
       margin: 0;
       min-height: 100vh;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(190,155,90,.08), transparent 28%),
+        radial-gradient(circle at 85% 90%, rgba(190,155,90,.08), transparent 28%),
+        #fbf8f1;
+      color: #55483d;
+      font-family: "Cormorant Garamond", Georgia, serif;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 24px;
-      font-family: Georgia, "Times New Roman", serif;
-      background: linear-gradient(135deg, #fffaf7, #f8eee8);
-      color: #4a3932;
+      padding: 18px;
     }
 
-    .card {
+    .page {
+      position: relative;
       width: 100%;
       max-width: 520px;
-      padding: 45px 25px;
+      min-height: calc(100vh - 36px);
+      border: 1px solid #b28a43;
+      padding: 45px 25px 40px;
       text-align: center;
-      background: rgba(255,255,255,0.95);
-      border-radius: 24px;
-      box-shadow: 0 10px 35px rgba(80,50,40,0.12);
+      overflow: hidden;
+      background: rgba(255,255,255,.30);
     }
 
-    .heart {
-      font-size: 42px;
-      margin-bottom: 15px;
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border: 1px solid rgba(178,138,67,.35);
+      pointer-events: none;
     }
 
-    h1 {
-      margin: 0 0 6px;
-      font-size: 30px;
-      font-weight: normal;
+    /* Decorative foliage */
+
+    .flowers {
+      position: absolute;
+      font-size: 75px;
+      line-height: .8;
+      opacity: .78;
+      pointer-events: none;
     }
+
+    .flowers.top {
+      top: -5px;
+      left: -10px;
+      transform: rotate(-12deg);
+    }
+
+    .flowers.bottom {
+      bottom: -5px;
+      right: -10px;
+      transform: rotate(165deg);
+    }
+
+    .leaves {
+      font-size: 45px;
+      color: #69765b;
+      display: block;
+      margin-top: 8px;
+    }
+
+    /* Header */
+
+    .hearts {
+      color: #a47b35;
+      font-size: 34px;
+      letter-spacing: 7px;
+      margin-bottom: 18px;
+    }
+
+    .names {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(52px, 13vw, 78px);
+      line-height: .95;
+      color: #a47b35;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .wedding {
+      font-size: 20px;
+      letter-spacing: 9px;
+      margin: 15px 0 18px;
+      color: #5d5147;
+    }
+
+    .gold-line {
+      width: 150px;
+      height: 1px;
+      background: #b28a43;
+      margin: 18px auto;
+    }
+
+    /* Greek title */
 
     .greek-title {
-      font-size: 22px;
-      margin-bottom: 25px;
+      font-size: clamp(30px, 8vw, 42px);
+      line-height: 1.05;
+      font-weight: 600;
+      color: #8f6b31;
+      margin: 20px auto 12px;
     }
 
-    .subtitle {
-      font-size: 18px;
-      line-height: 1.6;
-      color: #80675d;
+    .english-title {
+      font-size: 28px;
+      font-style: italic;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .greek-subtitle {
+      font-size: 27px;
+      font-style: italic;
+      line-height: 1.1;
       margin-bottom: 28px;
     }
+
+    /* Message */
 
     .message {
-      font-family: Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.7;
-      margin-bottom: 28px;
+      font-size: 19px;
+      line-height: 1.45;
+      margin: 0 auto 28px;
+      max-width: 430px;
     }
+
+    .message strong {
+      display: block;
+      margin-top: 20px;
+      font-size: 17px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* Language buttons */
 
     .buttons {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 15px;
+      width: 100%;
+      max-width: 380px;
+      margin: 0 auto;
     }
 
-    a {
-      display: block;
-      padding: 17px 20px;
-      border-radius: 14px;
+    .language {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 64px;
+      border: 1px solid #b28a43;
+      border-radius: 40px;
+      background: rgba(255,255,255,.48);
+      color: #57493e;
       text-decoration: none;
-      font-family: Arial, sans-serif;
-      font-size: 18px;
-      font-weight: bold;
-      background: #f3e2da;
-      color: #4a3932;
-      transition: transform 0.15s;
+      font-size: 23px;
+      font-weight: 500;
+      transition: all .2s ease;
     }
 
-    a:active {
-      transform: scale(0.98);
+    .language:hover {
+      background: #f5eee2;
+      transform: translateY(-2px);
     }
+
+    .flag {
+      position: absolute;
+      left: 24px;
+      font-size: 27px;
+    }
+
+    .arrow {
+      position: absolute;
+      right: 23px;
+      color: #a47b35;
+      font-size: 27px;
+    }
+
+    /* Footer */
 
     .footer {
-      margin-top: 30px;
-      font-family: Arial, sans-serif;
-      font-size: 13px;
-      line-height: 1.6;
-      color: #9a8880;
+      margin-top: 34px;
+      font-size: 18px;
+      font-style: italic;
+      line-height: 1.35;
+    }
+
+    .heart-small {
+      color: #a47b35;
+      font-size: 25px;
+      margin: 10px 0;
+    }
+
+    /* Small phones */
+
+    @media (max-width: 380px) {
+      .page {
+        padding: 35px 18px 30px;
+      }
+
+      .names {
+        font-size: 51px;
+      }
+
+      .greek-title {
+        font-size: 29px;
+      }
+
+      .english-title,
+      .greek-subtitle {
+        font-size: 24px;
+      }
+
+      .message {
+        font-size: 18px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="card">
+  <main class="page">
 
-    <div class="heart">🤍</div>
-
-    <h1>Thekla & Vassilis Wedding</h1>
-
-    <div class="greek-title">
-      Ο γάμος της Θέκλας και του Βασίλη
+    <!-- Decorative flowers -->
+    <div class="flowers top">
+      🌿<br>
+      🌸🌿
     </div>
 
-    <div class="subtitle">
-      Our beautiful moments<br>
+    <div class="flowers bottom">
+      🌿<br>
+      🌸🌿
+    </div>
+
+    <div class="hearts">♡ ♡</div>
+
+    <h1 class="names">
+      Thekla &amp; Vassilis
+    </h1>
+
+    <div class="wedding">
+      W E D D I N G
+    </div>
+
+    <div class="gold-line"></div>
+
+    <div class="greek-title">
+      Ο γάμος της Θέκλας<br>
+      και του Βασίλη
+    </div>
+
+    <div class="leaves">
+      ❧
+    </div>
+
+    <div class="gold-line"></div>
+
+    <div class="english-title">
+      Our beautiful moments
+    </div>
+
+    <div class="greek-subtitle">
       Οι όμορφες στιγμές μας
     </div>
 
     <div class="message">
+
       Share your beautiful wedding moments with us.<br>
+
       Μοιραστείτε μαζί μας τις όμορφες στιγμές του γάμου μας.
-      <br><br>
-      <strong>Choose your language</strong><br>
-      <strong>Επιλέξτε γλώσσα</strong>
+
+      <strong>
+        Choose your language<br>
+        Επιλέξτε γλώσσα
+      </strong>
+
     </div>
 
     <div class="buttons">
 
-      <a href="./index-gr.html">
-        🇬🇷 Ελληνικά
+      <a class="language" href="./index-gr.html">
+        <span class="flag">🇬🇷</span>
+        Ελληνικά
+        <span class="arrow">›</span>
       </a>
 
-      <a href="./en.html">
-        🇬🇧 English
+      <a class="language" href="./en.html">
+        <span class="flag">🇬🇧</span>
+        English
+        <span class="arrow">›</span>
       </a>
 
+    </div>
+
+    <div class="heart-small">
+      ─── ♡ ───
     </div>
 
     <div class="footer">
-      Thank you for celebrating with us 🤍<br>
-      Σας ευχαριστούμε που γιορτάζετε μαζί μας 🤍
+      Thank you for celebrating with us<br>
+      Σας ευχαριστούμε που γιορτάζετε μαζί μας
     </div>
 
-  </div>
+  </main>
 
 </body>
 </html>
