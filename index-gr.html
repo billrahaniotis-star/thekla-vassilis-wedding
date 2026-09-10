@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ο γάμος της Θέκλας και του Βασίλη</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap');
+*{box-sizing:border-box}
+body{margin:0;background:#f8f5ef;color:#51483e;font-family:Montserrat,sans-serif;text-align:center}
+.container{max-width:620px;margin:auto;padding:40px 22px 60px}
+.symbol{font-size:32px;margin-bottom:10px}
+h1{margin:0;font-family:'Cormorant Garamond',serif;font-size:42px;line-height:.95;font-weight:500;color:#706252}
+.subtitle{margin-top:13px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#a28f78}
+.line{width:55px;height:1px;background:#cdbda8;margin:20px auto}
+.instructions{font-size:14px;line-height:1.6;margin-bottom:12px}
+.counter{font-family:'Cormorant Garamond',serif;font-size:23px;margin-bottom:15px}
+button{border:0;border-radius:30px;padding:16px 28px;margin:7px;background:#82715f;color:white;font-family:Montserrat,sans-serif;font-size:14px;font-weight:500;cursor:pointer;box-shadow:0 5px 15px rgba(80,60,40,.15)}
+button:disabled{opacity:.5}.complete{background:#665846}
+.status{min-height:25px;margin-top:10px;font-size:12px;color:#8b7b69}
+.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:20px}
+.thumb{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px}
+.hidden{display:none!important}.success{padding-top:80px}.success-heart{font-size:55px;margin-bottom:20px}
+.success h2{font-family:'Cormorant Garamond',serif;font-size:45px;font-weight:500;color:#706252;margin:0}
+.success p{font-size:15px;line-height:1.7}
+.language{display:inline-block;margin-top:8px;padding:8px 14px;border:1px solid #cdbda8;border-radius:20px;color:#706252;text-decoration:none;font-size:11px}
+#cameraInput{display:none}
+</style>
+</head>
+<body>
+<div class="container" id="main">
+<div class="symbol">❦</div>
+<h1>Ο γάμος της<br>Θέκλας και του Βασίλη</h1>
+<div class="subtitle">Οι όμορφες στιγμές μας</div>
+<div class="line"></div>
+<div class="instructions">Τραβήξτε έως και 10 φωτογραφίες<br>και μοιραστείτε τις μαζί μας.</div>
+<div class="counter"><span id="count">0</span> / 10</div>
+<button id="cameraButton" onclick="takePhoto()">📷 Τραβήξτε φωτογραφία</button>
+<input id="cameraInput" type="file" accept="image/*" capture="environment" onchange="photoSelected(event)">
+<div class="status" id="status"></div>
+<div class="photos" id="photos"></div>
+<button id="completeButton" class="complete hidden" onclick="finish()">Ολοκληρώθηκε ❤️</button>
+<br><a class="language" href="./en.html">🇬🇧 English</a>
+</div>
+<div class="container success hidden" id="success">
+<div class="success-heart">❤️</div>
+<h2>Ευχαριστούμε!</h2>
+<p>Οι φωτογραφίες σας αποθηκεύτηκαν.<br><br>Ας κρατήσουμε αυτές τις στιγμές για πάντα.</p>
+</div>
+<script>
+const MAX_PHOTOS=10;
+const UPLOAD_URL="https://script.google.com/macros/s/AKfycbyLTCyFmOyQZnB9gxsT5a3CNIcMtiNmUB-_PMCCJWiDkfVqRqfWYvQ_PrPS1IBV3OlQ/exec";
+let photoCount=0;
+let sessionId="Guest_"+Date.now()+"_"+Math.random().toString(36).substring(2,8);
+function takePhoto(){if(photoCount>=MAX_PHOTOS)return;document.getElementById("cameraInput").click()}
+function photoSelected(event){const file=event.target.files[0];if(!file||photoCount>=MAX_PHOTOS)return;setStatus("Επεξεργασία φωτογραφίας...");compressImage(file,function(dataUrl){showPhoto(dataUrl);uploadPhoto(dataUrl)});event.target.value=""}
+function compressImage(file,callback){const reader=new FileReader();reader.onload=function(e){const img=new Image();img.onload=function(){let width=img.width,height=img.height,maxSize=1600;if(width>maxSize||height>maxSize){if(width>height){height=Math.round(height*maxSize/width);width=maxSize}else{width=Math.round(width*maxSize/height);height=maxSize}}const canvas=document.createElement("canvas");canvas.width=width;canvas.height=height;canvas.getContext("2d").drawImage(img,0,0,width,height);callback(canvas.toDataURL("image/jpeg",.80))};img.src=e.target.result};reader.readAsDataURL(file)}
+function showPhoto(dataUrl){const img=document.createElement("img");img.src=dataUrl;img.className="thumb";document.getElementById("photos").appendChild(img)}
+function uploadPhoto(dataUrl){setStatus("Αποθήκευση φωτογραφίας...");const form=document.createElement("form");form.method="POST";form.action=UPLOAD_URL;form.target="uploadFrame";form.style.display="none";addField(form,"photo",dataUrl);addField(form,"fileName",sessionId+"_photo_"+(photoCount+1)+".jpg");addField(form,"sessionId",sessionId);document.body.appendChild(form);form.submit();form.remove();photoCount++;updateCounter();setStatus("✓ Η φωτογραφία προστέθηκε!");if(photoCount>=MAX_PHOTOS)document.getElementById("cameraButton").disabled=true;document.getElementById("completeButton").classList.remove("hidden")}
+function addField(form,name,value){const input=document.createElement("input");input.type="hidden";input.name=name;input.value=value;form.appendChild(input)}
+function updateCounter(){document.getElementById("count").textContent=photoCount}
+function setStatus(message){document.getElementById("status").textContent=message}
+function finish(){document.getElementById("main").classList.add("hidden");document.getElementById("success").classList.remove("hidden")}
+</script>
+<iframe name="uploadFrame" style="display:none"></iframe>
+</body>
+</html>
