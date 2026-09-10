@@ -8,334 +8,740 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
   <style>
+
+    /* =====================================================
+       BASE
+    ===================================================== */
+
     * {
       box-sizing: border-box;
     }
 
-    html, body {
-      margin: 0;
+    html {
       min-height: 100%;
     }
 
     body {
-      background: #f8f5ed;
-      color: #51483f;
-      font-family: "Cormorant Garamond", Georgia, serif;
-      padding: 12px;
+      margin: 0;
+      min-height: 100vh;
+
+      background: #f5f1e8;
+
+      color: #514b44;
+
+      font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    .card {
+
+    /* =====================================================
+       MAIN INVITATION
+    ===================================================== */
+
+    .invitation {
       position: relative;
-      width: 100%;
-      max-width: 480px;
-      min-height: calc(100vh - 24px);
-      margin: auto;
-      padding: 30px 22px 25px;
-      text-align: center;
+
+      width: calc(100% - 28px);
+      max-width: 500px;
+
+      min-height: calc(100vh - 28px);
+
+      margin: 14px auto;
+
+      padding:
+        42px
+        30px
+        36px;
 
       background:
-        radial-gradient(circle at 10% 8%, rgba(174,145,88,.10), transparent 22%),
-        radial-gradient(circle at 90% 92%, rgba(174,145,88,.10), transparent 22%),
-        #fcfaf5;
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.55),
+          rgba(255,255,255,.15)
+        ),
+        #fbf9f3;
 
-      border: 1px solid #b18a4a;
+      border: 1px solid #b5965c;
+
+      overflow: hidden;
     }
 
-    .card::after {
+
+    /* Inner fine frame */
+
+    .invitation::before {
       content: "";
+
       position: absolute;
-      inset: 7px;
-      border: 1px solid rgba(177,138,74,.35);
+
+      inset: 8px;
+
+      border: 1px solid rgba(181,150,92,.35);
+
       pointer-events: none;
     }
 
-    /* Botanical decorations */
 
-    .botanical {
+    /* =====================================================
+       CORNER BOTANICAL LINE ART
+    ===================================================== */
+
+    .corner {
       position: absolute;
-      color: #718064;
-      opacity: .42;
-      font-size: 42px;
-      line-height: .8;
-      z-index: 0;
+
+      width: 75px;
+      height: 100px;
+
+      opacity: .30;
+
+      pointer-events: none;
     }
 
-    .botanical.top {
-      top: 20px;
-      left: 15px;
-      transform: rotate(-20deg);
+    .corner::before,
+    .corner::after {
+      content: "";
+
+      position: absolute;
+
+      border: 1px solid #78816e;
+
+      border-radius: 100% 0 100% 0;
     }
 
-    .botanical.bottom {
-      bottom: 15px;
-      right: 15px;
-      transform: rotate(160deg);
+    .corner::before {
+      width: 34px;
+      height: 17px;
+
+      transform: rotate(-35deg);
     }
+
+    .corner::after {
+      width: 28px;
+      height: 15px;
+
+      transform: rotate(25deg);
+    }
+
+    .corner.top-left {
+      top: 24px;
+      left: 20px;
+    }
+
+    .corner.top-left::before {
+      top: 15px;
+      left: 8px;
+    }
+
+    .corner.top-left::after {
+      top: 36px;
+      left: 25px;
+    }
+
+    .corner.bottom-right {
+      right: 20px;
+      bottom: 24px;
+
+      transform: rotate(180deg);
+    }
+
+    .corner.bottom-right::before {
+      top: 15px;
+      left: 8px;
+    }
+
+    .corner.bottom-right::after {
+      top: 36px;
+      left: 25px;
+    }
+
+
+    /* =====================================================
+       CONTENT
+    ===================================================== */
 
     .content {
       position: relative;
       z-index: 2;
+
+      text-align: center;
     }
 
-    .ornament {
-      color: #a57b36;
-      font-size: 27px;
-      letter-spacing: 8px;
-      margin-bottom: 10px;
+
+    /* =====================================================
+       TOP HEART
+    ===================================================== */
+
+    .top-heart {
+      font-family: Georgia, serif;
+
+      font-size: 25px;
+
+      font-weight: 400;
+
+      color: #a8864d;
+
+      margin-bottom: 17px;
     }
+
+
+    /* =====================================================
+       NAMES
+    ===================================================== */
 
     .names {
-      font-family: "Great Vibes", cursive;
-      color: #a27834;
-      font-size: clamp(54px, 15vw, 76px);
-      line-height: .85;
-      font-weight: 400;
       margin: 0;
+
+      font-family:
+        "Great Vibes",
+        cursive;
+
+      font-size:
+        clamp(60px, 16vw, 82px);
+
+      font-weight: 400;
+
+      line-height: .82;
+
+      letter-spacing: .5px;
+
+      color: #a37d3e;
     }
+
+
+    /* =====================================================
+       WEDDING
+    ===================================================== */
 
     .wedding {
-      margin-top: 15px;
-      font-size: 17px;
-      letter-spacing: 7px;
-      color: #665b51;
+      margin-top: 23px;
+
+      font-size: 14px;
+
+      letter-spacing: 8px;
+
+      color: #5b554e;
+
+      font-weight: 500;
     }
 
-    .line {
-      width: 115px;
+
+    /* =====================================================
+       GOLD ORNAMENT
+    ===================================================== */
+
+    .ornament {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 12px;
+
+      margin: 22px auto 24px;
+
+      width: 150px;
+    }
+
+    .ornament::before,
+    .ornament::after {
+      content: "";
+
       height: 1px;
-      background: #b18a4a;
-      margin: 15px auto;
+
+      flex: 1;
+
+      background: #b5965c;
     }
 
-    /* Greek */
+    .ornament span {
+      font-size: 12px;
+
+      color: #a8864d;
+    }
+
+
+    /* =====================================================
+       GREEK TITLE
+    ===================================================== */
 
     .greek-title {
-      color: #947037;
-      font-size: clamp(30px, 8.5vw, 40px);
-      line-height: 1;
+      margin: 0 auto;
+
+      max-width: 390px;
+
+      color: #665f57;
+
+      font-size:
+        clamp(28px, 7vw, 36px);
+
+      font-weight: 500;
+
+      line-height: 1.05;
+
+      letter-spacing: .2px;
+    }
+
+    .greek-title strong {
+      color: #9d793e;
+
       font-weight: 600;
-      margin: 10px auto;
     }
 
-    .branch {
-      color: #758166;
-      font-size: 28px;
-      margin: 4px 0;
+
+    /* =====================================================
+       SMALL DECORATIVE HEART
+    ===================================================== */
+
+    .small-heart {
+      margin: 23px auto 25px;
+
+      color: #a8864d;
+
+      font-size: 18px;
     }
 
-    /* Subtitle */
 
-    .english-subtitle,
-    .greek-subtitle {
-      font-size: 25px;
+    /* =====================================================
+       MOMENTS
+    ===================================================== */
+
+    .moments {
+      margin: 0;
+
+      font-size:
+        clamp(27px, 7vw, 34px);
+
       font-style: italic;
+
+      font-weight: 400;
+
+      color: #514b44;
+
       line-height: 1.05;
     }
 
-    .greek-subtitle {
-      margin-top: 3px;
+    .moments-greek {
+      margin-top: 4px;
+
+      font-size:
+        clamp(25px, 6.5vw, 32px);
+
+      font-style: italic;
+
+      color: #514b44;
+
+      line-height: 1.05;
     }
 
-    /* Message */
+
+    /* =====================================================
+       MESSAGE
+    ===================================================== */
 
     .message {
-      max-width: 410px;
-      margin: 18px auto 17px;
+      max-width: 350px;
+
+      margin: 22px auto 0;
+
       font-size: 17px;
-      line-height: 1.3;
+
+      line-height: 1.25;
+
+      color: #706961;
     }
+
+
+    /* =====================================================
+       LANGUAGE LABEL
+    ===================================================== */
 
     .choose {
-      margin-top: 13px;
-      font-size: 14px;
-      letter-spacing: 3px;
-      line-height: 1.4;
+      margin-top: 29px;
+
+      font-size: 11px;
+
+      letter-spacing: 4px;
+
       text-transform: uppercase;
+
+      color: #80776e;
     }
 
-    /* Buttons */
+    .choose-greek {
+      margin-top: 6px;
 
-    .buttons {
+      font-size: 14px;
+
+      letter-spacing: 2px;
+
+      color: #80776e;
+    }
+
+
+    /* =====================================================
+       LANGUAGE BUTTONS
+    ===================================================== */
+
+    .languages {
       width: 100%;
-      max-width: 350px;
-      margin: 14px auto 0;
+
+      max-width: 360px;
+
+      margin: 19px auto 0;
+
       display: flex;
+
       flex-direction: column;
-      gap: 11px;
+
+      gap: 13px;
     }
+
 
     .language {
       position: relative;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
       height: 56px;
 
-      border: 1px solid #b18a4a;
-      border-radius: 30px;
+      border: 1px solid #b5965c;
 
-      background: rgba(255,255,255,.60);
-      color: #51483f;
+      border-radius: 999px;
+
+      background: rgba(255,255,255,.42);
+
+      color: #554e47;
 
       text-decoration: none;
+
       font-size: 21px;
+
       font-weight: 500;
 
-      transition: .2s ease;
+      letter-spacing: .5px;
+
+      transition:
+        background .25s ease,
+        transform .2s ease;
     }
 
-    .language:active {
-      transform: scale(.98);
-      background: #f3ecdf;
+
+    .language:hover {
+      background: #fffdf8;
     }
+
+
+    .language:active {
+      transform: scale(.985);
+    }
+
 
     .flag {
       position: absolute;
-      left: 20px;
-      font-size: 24px;
+
+      left: 19px;
+
+      display: flex;
+
+      align-items: center;
+
+      font-size: 20px;
     }
+
 
     .arrow {
       position: absolute;
+
       right: 20px;
-      color: #a27834;
-      font-size: 25px;
+
+      color: #a8864d;
+
+      font-family: Georgia, serif;
+
+      font-size: 23px;
+
+      line-height: 1;
     }
 
-    /* Footer */
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
 
     .footer {
-      margin-top: 18px;
-      font-size: 16px;
+      margin-top: 29px;
+
+      font-size: 15px;
+
       font-style: italic;
-      line-height: 1.25;
+
+      line-height: 1.2;
+
+      color: #8a8177;
     }
 
     .footer-heart {
-      color: #a27834;
-      font-size: 21px;
-      margin-bottom: 2px;
+      margin-bottom: 5px;
+
+      color: #a8864d;
+
+      font-size: 17px;
     }
 
-    /* Smaller phones */
 
-    @media (max-height: 700px) {
-      .card {
-        padding-top: 23px;
+    /* =====================================================
+       SMALL PHONES
+    ===================================================== */
+
+    @media (max-height: 740px) {
+
+      .invitation {
+        padding-top: 31px;
+        padding-bottom: 27px;
       }
 
-      .names {
-        font-size: 55px;
-      }
-
-      .greek-title {
-        font-size: 30px;
-      }
-
-      .english-subtitle,
-      .greek-subtitle {
-        font-size: 22px;
-      }
-
-      .message {
-        margin-top: 13px;
+      .top-heart {
         margin-bottom: 12px;
       }
 
+      .names {
+        font-size: 60px;
+      }
+
+      .wedding {
+        margin-top: 18px;
+      }
+
+      .ornament {
+        margin-top: 18px;
+        margin-bottom: 19px;
+      }
+
+      .greek-title {
+        font-size: 28px;
+      }
+
+      .small-heart {
+        margin: 18px auto;
+      }
+
+      .moments {
+        font-size: 27px;
+      }
+
+      .moments-greek {
+        font-size: 25px;
+      }
+
+      .message {
+        margin-top: 17px;
+        font-size: 16px;
+      }
+
+      .choose {
+        margin-top: 22px;
+      }
+
       .footer {
-        margin-top: 12px;
+        margin-top: 21px;
       }
     }
+
+
+    /* =====================================================
+       VERY SMALL SCREENS
+    ===================================================== */
+
+    @media (max-width: 360px) {
+
+      .invitation {
+        width: calc(100% - 18px);
+
+        margin: 9px auto;
+
+        min-height: calc(100vh - 18px);
+
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+
+      .names {
+        font-size: 56px;
+      }
+
+      .greek-title {
+        font-size: 26px;
+      }
+
+      .message {
+        max-width: 310px;
+      }
+
+      .language {
+        height: 53px;
+      }
+    }
+
   </style>
 </head>
 
+
 <body>
 
-  <div class="card">
+  <main class="invitation">
 
-    <div class="botanical top">
-      ❧<br>❦
-    </div>
+    <!-- Subtle botanical corners -->
+    <div class="corner top-left"></div>
+    <div class="corner bottom-right"></div>
 
-    <div class="botanical bottom">
-      ❧<br>❦
-    </div>
 
     <div class="content">
 
-      <div class="ornament">♡</div>
+
+      <!-- Top -->
+
+      <div class="top-heart">♡</div>
+
+
+      <!-- Names -->
 
       <h1 class="names">
         Thekla &amp; Vassilis
       </h1>
 
+
+      <!-- Wedding -->
+
       <div class="wedding">
         W E D D I N G
       </div>
 
-      <div class="line"></div>
+
+      <!-- Divider -->
+
+      <div class="ornament">
+        <span>♡</span>
+      </div>
+
+
+      <!-- Greek -->
 
       <div class="greek-title">
-        Ο γάμος της Θέκλας<br>
+
+        <strong>Ο γάμος της Θέκλας</strong><br>
+
         και του Βασίλη
+
       </div>
 
-      <div class="branch">
-        ❧
+
+      <!-- Small ornament -->
+
+      <div class="small-heart">
+        ♡
       </div>
 
-      <div class="line"></div>
 
-      <div class="english-subtitle">
+      <!-- Moments -->
+
+      <div class="moments">
         Our beautiful moments
       </div>
 
-      <div class="greek-subtitle">
+      <div class="moments-greek">
         Οι όμορφες στιγμές μας
       </div>
 
+
+      <!-- Message -->
+
       <div class="message">
 
-        Share your beautiful wedding moments with us.<br>
-
-        Μοιραστείτε μαζί μας τις όμορφες στιγμές του γάμου μας.
-
-        <div class="choose">
-          Choose your language<br>
-          Επιλέξτε γλώσσα
-        </div>
+        Help us capture the moments<br>
+        we will cherish forever.
 
       </div>
 
-      <div class="buttons">
 
-        <a class="language" href="./index-gr.html">
+      <!-- Language -->
+
+      <div class="choose">
+        Choose your language
+      </div>
+
+      <div class="choose-greek">
+        Επιλέξτε γλώσσα
+      </div>
+
+
+      <!-- Buttons -->
+
+      <div class="languages">
+
+
+        <a
+          class="language"
+          href="./index-gr.html"
+          aria-label="Ελληνικά"
+        >
+
           <span class="flag">🇬🇷</span>
+
           Ελληνικά
+
           <span class="arrow">›</span>
+
         </a>
 
-        <a class="language" href="./en.html">
+
+        <a
+          class="language"
+          href="./en.html"
+          aria-label="English"
+        >
+
           <span class="flag">🇬🇧</span>
+
           English
+
           <span class="arrow">›</span>
+
         </a>
+
 
       </div>
+
+
+      <!-- Footer -->
 
       <div class="footer">
-        <div class="footer-heart">♡</div>
-        Thank you for celebrating with us<br>
-        Σας ευχαριστούμε που γιορτάζετε μαζί μας
+
+        <div class="footer-heart">
+          ♡
+        </div>
+
+        With love, Thekla &amp; Vassilis
+
       </div>
+
 
     </div>
 
-  </div>
+  </main>
 
 </body>
 </html>
