@@ -1,538 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>Βασίλης και Θέκλα</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
-
 <style>
-
-:root{
---cream:#f8f3e7;
---paper:#fcfaf4;
---gold:#b58a3e;
---gold2:#c8a66a;
---ink:#403a33;
---muted:#6d665c;
---green:#586b52;
---blue:#9db9d2;
---blue2:#6f91ad;
+* {
+  box-sizing: border-box;
 }
 
-*{
-box-sizing:border-box;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #f8f3e7;
+  min-height: 100%;
 }
 
-html,body{
-margin:0;
-min-height:100%;
-background:var(--cream);
+body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-body{
-color:var(--ink);
-font-family:"Cormorant Garamond",Georgia,serif;
--webkit-font-smoothing:antialiased;
-text-rendering:optimizeLegibility;
+.wedding-page {
+  position: relative;
+  width: 100%;
+  max-width: 1024px;
+  line-height: 0;
 }
 
-.page{
-position:relative;
-width:calc(100% - 22px);
-max-width:520px;
-min-height:calc(100vh - 22px);
-margin:11px auto;
-padding:34px 24px 30px;
-background:
-radial-gradient(
-circle at 50% 20%,
-rgba(255,255,255,.72),
-transparent 38%
-),
-var(--paper);
-border:1px solid var(--gold);
-overflow:hidden;
+.wedding-page img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-.page:before{
-content:"";
-position:absolute;
-inset:7px;
-border:1px solid rgba(181,138,62,.42);
-pointer-events:none;
+/* Greek button */
+.language-link.greek {
+  position: absolute;
+  left: 22.3%;
+  top: 59.15%;
+  width: 55.5%;
+  height: 8.1%;
+  display: block;
+  border-radius: 40px;
+  text-decoration: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.content{
-position:relative;
-z-index:2;
-text-align:center;
+/* English button */
+.language-link.english {
+  position: absolute;
+  left: 22.3%;
+  top: 69.15%;
+  width: 55.5%;
+  height: 8.1%;
+  display: block;
+  border-radius: 40px;
+  text-decoration: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Botanical flowers */
-
-.floral{
-position:absolute;
-z-index:1;
-pointer-events:none;
-opacity:.96;
+/* Keyboard accessibility */
+.language-link:focus-visible {
+  box-shadow: 0 0 0 3px rgba(181,138,62,.55);
 }
 
-.floral.top{
-top:-10px;
-left:-24px;
-width:185px;
-}
+@media (max-width: 600px) {
 
-.floral.bottom{
-right:-24px;
-bottom:-12px;
-width:185px;
-transform:rotate(180deg);
-}
-
-/* Rings */
-
-.rings{
-color:var(--gold);
-font-size:29px;
-line-height:1;
-margin:6px 0 18px;
-}
-
-/* Names */
-
-.names{
-margin:0;
-color:var(--gold);
-font-family:"Great Vibes",cursive;
-font-size:clamp(61px,17vw,82px);
-font-weight:400;
-line-height:.82;
-}
-
-/* Wedding */
-
-.wedding{
-margin-top:21px;
-font-size:13px;
-letter-spacing:7px;
-color:var(--muted);
-}
-
-/* Gold ornament */
-
-.ornament{
-display:flex;
-align-items:center;
-gap:12px;
-width:170px;
-margin:21px auto;
-color:var(--gold);
-}
-
-.ornament:before,
-.ornament:after{
-content:"";
-height:1px;
-flex:1;
-background:var(--gold2);
-}
-
-.ornament span{
-font-size:17px;
-}
-
-/* Main bilingual message */
-
-.hero-title{
-margin:0 auto;
-color:var(--ink);
-font-size:clamp(27px,7.5vw,37px);
-font-weight:500;
-line-height:1.02;
-}
-
-.hero-title .accent{
-color:var(--gold);
-font-weight:600;
-}
-
-.subtitle{
-margin:17px auto 0;
-max-width:420px;
-color:var(--green);
-font-size:clamp(20px,5.6vw,27px);
-font-style:italic;
-line-height:1.05;
-}
-
-/* Language heading */
-
-.choose{
-margin:26px auto 12px;
-color:var(--muted);
-font-size:11px;
-letter-spacing:3px;
-text-transform:uppercase;
-}
-
-/* Language buttons */
-
-.buttons{
-max-width:355px;
-margin:auto;
-display:grid;
-gap:12px;
-}
-
-.language{
-position:relative;
-display:flex;
-align-items:center;
-justify-content:center;
-
-width:100%;
-min-height:55px;
-
-padding:10px 52px;
-
-border:1px solid var(--gold);
-border-radius:999px;
-
-background:rgba(255,255,255,.55);
-
-color:var(--ink);
-text-decoration:none;
-
-font-size:21px;
-font-weight:500;
-
-transition:.2s ease;
-}
-
-.language:hover{
-background:#fffdf8;
-transform:translateY(-1px);
-}
-
-.language:active{
-transform:scale(.985);
-background:#fffdf8;
-}
-
-.flag{
-position:absolute;
-left:18px;
-font-size:19px;
-}
-
-.arrow{
-position:absolute;
-right:19px;
-color:var(--gold);
-font-size:24px;
-}
-
-/* Footer */
-
-.footer{
-margin-top:25px;
-color:#8a8175;
-font-size:15px;
-font-style:italic;
-line-height:1.2;
-}
-
-.footer-heart{
-color:var(--gold);
-font-size:18px;
-margin-bottom:4px;
-}
-
-/* Mobile height adjustment */
-
-@media(max-height:740px){
-
-.page{
-padding-top:27px;
-padding-bottom:24px;
-}
-
-.names{
-font-size:59px;
-}
-
-.rings{
-margin-bottom:12px;
-}
-
-.wedding{
-margin-top:16px;
-}
-
-.ornament{
-margin:16px auto;
-}
-
-.hero-title{
-font-size:27px;
-}
-
-.subtitle{
-font-size:22px;
-}
-
-.choose{
-margin-top:19px;
-}
-
-.footer{
-margin-top:19px;
-}
+  .language-link.greek,
+  .language-link.english {
+    border-radius: 28px;
+  }
 
 }
-
 </style>
 </head>
 
 <body>
 
-<main class="page">
-
-<!-- TOP BLUE / WHITE / GREEN BOTANICAL FLOWERS -->
-
-<div class="floral top">
-
-<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
-
-<g fill="none" stroke="#586b52" stroke-width="2" stroke-linecap="round">
-
-<path d="M5 170 C40 125,60 75,132 12"/>
-
-<path d="M35 130 C63 111,88 90,106 61"/>
-
-</g>
-
-<!-- Green leaves -->
-
-<g fill="#586b52">
-
-<ellipse cx="54" cy="112" rx="9" ry="25"
-transform="rotate(-55 54 112)"/>
-
-<ellipse cx="72" cy="94" rx="9" ry="25"
-transform="rotate(42 72 94)"/>
-
-<ellipse cx="88" cy="72" rx="9" ry="26"
-transform="rotate(-48 88 72)"/>
-
-<ellipse cx="108" cy="52" rx="9" ry="24"
-transform="rotate(48 108 52)"/>
-
-<ellipse cx="125" cy="35" rx="9" ry="25"
-transform="rotate(-48 125 35)"/>
-
-</g>
-
-<!-- Blue flowers -->
-
-<g fill="#9db9d2" stroke="#6f91ad">
-
-<circle cx="29" cy="82" r="12"/>
-
-<circle cx="77" cy="48" r="11"/>
-
-</g>
-
-<!-- White flower -->
-
-<g fill="#fffdf8"
-stroke="#c8a66a"
-stroke-width="1.2">
-
-<circle cx="48" cy="55" r="19"/>
-
-<circle cx="48" cy="55" r="19"
-transform="rotate(72 48 55)"/>
-
-<circle cx="48" cy="55" r="6"
-fill="#d6b56b"/>
-
-</g>
-
-</svg>
-
-</div>
-
-
-<!-- BOTTOM BLUE / WHITE / GREEN BOTANICAL FLOWERS -->
-
-<div class="floral bottom">
-
-<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
-
-<g fill="none" stroke="#586b52" stroke-width="2">
-
-<path d="M5 170 C40 125,60 75,132 12"/>
-
-</g>
-
-<g fill="#586b52">
-
-<ellipse cx="54" cy="112" rx="9" ry="25"
-transform="rotate(-55 54 112)"/>
-
-<ellipse cx="72" cy="94" rx="9" ry="25"
-transform="rotate(42 72 94)"/>
-
-<ellipse cx="88" cy="72" rx="9" ry="26"
-transform="rotate(-48 88 72)"/>
-
-<ellipse cx="108" cy="52" rx="9" ry="24"
-transform="rotate(48 108 52)"/>
-
-</g>
-
-<!-- Blue flowers -->
-
-<g fill="#9db9d2" stroke="#6f91ad">
-
-<circle cx="29" cy="82" r="12"/>
-
-<circle cx="77" cy="48" r="11"/>
-
-</g>
-
-<!-- White flower -->
-
-<g fill="#fffdf8"
-stroke="#c8a66a"
-stroke-width="1.2">
-
-<circle cx="48" cy="55" r="19"/>
-
-<circle cx="48" cy="55" r="19"
-transform="rotate(72 48 55)"/>
-
-<circle cx="48" cy="55" r="6"
-fill="#d6b56b"/>
-
-</g>
-
-</svg>
-
-</div>
-
-
-<div class="content">
-
-<!-- Wedding rings -->
-
-<div class="rings">♡</div>
-
-
-<!-- NAMES -->
-
-<h1 class="names">
-Βασίλης και Θέκλα
-</h1>
-
-
-<div class="wedding">
-W E D D I N G
-</div>
-
-
-<!-- GOLD HEART DIVIDER -->
-
-<div class="ornament">
-<span>♡</span>
-</div>
-
-
-<!-- BILINGUAL MESSAGE -->
-
-<div class="hero-title">
-
-<span class="accent">
-OUR BEAUTIFUL MOMENTS
-</span>
-
-<br>
-
-THROUGH YOUR EYES
-
-</div>
-
-
-<div class="subtitle">
-
-Οι όμορφες στιγμές μας από τα μάτια σας
-
-</div>
-
-
-<!-- LANGUAGE SELECTION -->
-
-<div class="choose">
-Choose your language
-</div>
-
-
-<div class="buttons">
-
-<!-- GREEK -->
-
-<a
-class="language"
-href="./index-gr.html"
+<main
+  class="wedding-page"
+  aria-label="Βασίλης και Θέκλα — επιλογή γλώσσας"
 >
 
-<span class="flag">🇬🇷</span>
+  <!-- Approved wedding landing-page design -->
+  <img
+    src="./index-design.png"
+    alt="Βασίλης και Θέκλα — Οι όμορφες στιγμές μας από τα μάτια σας"
+  >
 
-Ελληνικά
+  <!-- Greek button -->
+  <a
+    class="language-link greek"
+    href="./index-gr.html"
+    aria-label="Ελληνικά"
+  ></a>
 
-<span class="arrow">›</span>
-
-</a>
-
-
-<!-- ENGLISH -->
-
-<a
-class="language"
-href="./en.html"
->
-
-<span class="flag">🇬🇧</span>
-
-English
-
-<span class="arrow">›</span>
-
-</a>
-
-</div>
-
-
-<!-- FOOTER -->
-
-<div class="footer">
-
-<div class="footer-heart">
-♡
-</div>
-
-With love, Vasilis &amp; Thekla
-
-</div>
-
-</div>
+  <!-- English button -->
+  <a
+    class="language-link english"
+    href="./en.html"
+    aria-label="English"
+  ></a>
 
 </main>
 
